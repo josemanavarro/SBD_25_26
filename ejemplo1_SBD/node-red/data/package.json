@@ -1,0 +1,11 @@
+{
+    "name": "node-red-project",
+    "description": "A Node-RED Project",
+    "version": "0.0.1",
+    "private": true,
+    "dependencies": {
+        "node-red-contrib-influxdb": "~0.7.0",
+        "node-red-dashboard": "~3.6.6",
+        "node-red-node-telegrambot": "~0.1.6"
+    }
+}

@@ -1,0 +1,48 @@
+services:
+  mosquitto:
+    image: eclipse-mosquitto
+    ports:
+      - "1883:1883"
+      - "8883:8883"
+      - "9001:9001"
+    volumes:
+      - ./mosquitto/config:/mosquitto/config
+      - ./mosquitto/data:/mosquitto/data
+      - ./mosquitto/log:/mosquitto/log
+    restart: unless-stopped
+    networks:
+      - red-ejemplo
+  node-red:
+    image: nodered/node-red
+    ports:
+      - "1880:1880"
+    environment:
+      - TZ=Europe/Madrid
+    volumes:
+      - ./node-red/data:/data
+    restart: unless-stopped
+    depends_on:
+      - mosquitto
+    networks:
+      - red-ejemplo
+  influxdb:
+    image: influxdb:2.7.12-alpine
+    ports:
+      - "8086:8086"
+    volumes:
+      - ./influxdb/data:/var/lib/influxdb2
+      - ./influxdb/config:/etc/influxdb2
+    environment:
+      - DOCKER_INFLUXDB_INIT_MODE=setup
+      - DOCKER_INFLUXDB_INIT_USERNAME=admin
+      - DOCKER_INFLUXDB_INIT_PASSWORD=Alandalus2526
+      - DOCKER_INFLUXDB_INIT_ORG=sbd
+      - DOCKER_INFLUXDB_INIT_BUCKET=aula
+    restart: unless-stopped
+    depends_on:
+      - node-red
+    networks:
+      - red-ejemplo
+
+networks:
+  red-ejemplo:

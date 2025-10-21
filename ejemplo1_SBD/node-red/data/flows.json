@@ -1,0 +1,388 @@
+[
+    {
+        "id": "fe040b1cb2113e0e",
+        "type": "tab",
+        "label": "Flujo 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "ad3dc706cb7988af",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "mosquitto",
+        "port": 1883,
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "/conexión",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "\"Hola desde node red\"",
+        "birthMsg": {},
+        "closeTopic": "/conexión",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "\"Adios desde node red\"",
+        "closeMsg": {},
+        "willTopic": "/conexión",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "\"Error desde node red\"",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "ef2a3dfb2a5318a2",
+        "type": "ui_tab",
+        "name": "Aula",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "eb91b2178b1d3a73",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "d12102950fba9caf",
+        "type": "ui_group",
+        "name": "Frame Aula",
+        "tab": "ef2a3dfb2a5318a2",
+        "order": 1,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "4d74df80c151c231",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": 8086,
+        "protocol": "http",
+        "database": "database",
+        "name": "influxdb",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "2.0",
+        "url": "http://influxdb:8086",
+        "timeout": 10,
+        "rejectUnauthorized": true
+    },
+    {
+        "id": "69fb9deac5425072",
+        "type": "mqtt in",
+        "z": "fe040b1cb2113e0e",
+        "name": "Temperatura",
+        "topic": "/aula/temperatura",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "ad3dc706cb7988af",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 250,
+        "y": 120,
+        "wires": [
+            [
+                "e04354b549e14a68",
+                "c6def53a651bb073",
+                "4fc5909dc8b0600d",
+                "e73ab6a4980839bb",
+                "f95cf2c8b42721f1"
+            ]
+        ]
+    },
+    {
+        "id": "e04354b549e14a68",
+        "type": "debug",
+        "z": "fe040b1cb2113e0e",
+        "name": "Salida pruebas",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 580,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "a5c71189f9caeb6d",
+        "type": "mqtt in",
+        "z": "fe040b1cb2113e0e",
+        "name": "Humedad",
+        "topic": "/aula/humedad",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "ad3dc706cb7988af",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 240,
+        "y": 260,
+        "wires": [
+            [
+                "e04354b549e14a68"
+            ]
+        ]
+    },
+    {
+        "id": "5f35a3448fc90766",
+        "type": "inject",
+        "z": "fe040b1cb2113e0e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 290,
+        "y": 380,
+        "wires": [
+            [
+                "ffc674ad8d9a6cc8"
+            ]
+        ]
+    },
+    {
+        "id": "ffc674ad8d9a6cc8",
+        "type": "mqtt out",
+        "z": "fe040b1cb2113e0e",
+        "name": "Test",
+        "topic": "/conexión/test",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ad3dc706cb7988af",
+        "x": 670,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "c6def53a651bb073",
+        "type": "file",
+        "z": "fe040b1cb2113e0e",
+        "name": "Salida",
+        "filename": "/data/salida.txt",
+        "filenameType": "str",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 550,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4fc5909dc8b0600d",
+        "type": "ui_gauge",
+        "z": "fe040b1cb2113e0e",
+        "name": "Indicador",
+        "group": "d12102950fba9caf",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Temperatura",
+        "label": "ºC",
+        "format": "{{value}}",
+        "min": "-10",
+        "max": "50",
+        "colors": [
+            "#1a5fb4",
+            "#00b500",
+            "#ca3838"
+        ],
+        "seg1": "10",
+        "seg2": "35",
+        "diff": false,
+        "className": "",
+        "x": 700,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "e73ab6a4980839bb",
+        "type": "ui_chart",
+        "z": "fe040b1cb2113e0e",
+        "name": "Gráfica",
+        "group": "d12102950fba9caf",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "label": "Temperatura",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": true,
+        "ymin": "-10",
+        "ymax": "45",
+        "removeOlder": "30",
+        "removeOlderPoints": "1800",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 700,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f95cf2c8b42721f1",
+        "type": "influxdb out",
+        "z": "fe040b1cb2113e0e",
+        "influxdb": "4d74df80c151c231",
+        "name": "Salida-Temperatura",
+        "measurement": "temperatura",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "sbd",
+        "bucket": "aula",
+        "x": 890,
+        "y": 80,
+        "wires": []
+    }
+]
