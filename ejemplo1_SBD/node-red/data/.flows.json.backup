@@ -181,7 +181,7 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 310,
+        "x": 250,
         "y": 120,
         "wires": [
             [
@@ -206,7 +206,7 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 640,
+        "x": 580,
         "y": 220,
         "wires": []
     },
@@ -223,7 +223,7 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 300,
+        "x": 240,
         "y": 260,
         "wires": [
             [
@@ -252,7 +252,7 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 290,
+        "x": 270,
         "y": 380,
         "wires": [
             [
@@ -289,7 +289,7 @@
         "createDir": true,
         "overwriteFile": "false",
         "encoding": "none",
-        "x": 610,
+        "x": 550,
         "y": 300,
         "wires": [
             []
@@ -319,7 +319,7 @@
         "seg2": "35",
         "diff": false,
         "className": "",
-        "x": 760,
+        "x": 700,
         "y": 40,
         "wires": []
     },
@@ -361,7 +361,7 @@
         "outputs": 1,
         "useDifferentColor": false,
         "className": "",
-        "x": 760,
+        "x": 700,
         "y": 140,
         "wires": [
             []
@@ -381,8 +381,29 @@
         "retentionPolicyV18Flux": "",
         "org": "sbd",
         "bucket": "aula",
-        "x": 950,
+        "x": 890,
         "y": 80,
         "wires": []
+    },
+    {
+        "id": "1d8552e862e45298",
+        "type": "mqtt in",
+        "z": "fe040b1cb2113e0e",
+        "name": "BTC",
+        "topic": "coingecko/BTC",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "ad3dc706cb7988af",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 230,
+        "y": 500,
+        "wires": [
+            [
+                "ffc674ad8d9a6cc8"
+            ]
+        ]
     }
 ]

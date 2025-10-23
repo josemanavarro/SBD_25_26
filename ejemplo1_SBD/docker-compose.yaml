@@ -43,6 +43,41 @@ services:
       - node-red
     networks:
       - red-ejemplo
+  coingecko-mqtt:
+    build:
+      context: coingecko-mqtt
+      dockerfile: Dockerfile
+    container_name: coingecko-mqtt
+    restart: unless-stopped
+    environment:
+      BROKER_HOST: mosquitto         
+      BROKER_PORT: 1883
+      MQTT_USERNAME: "admin"
+      MQTT_PASSWORD: "Alandalus2526"
+      MQTT_QOS: "0"
+      MQTT_RETAIN: "false"
+      COINS: "bitcoin,ethereum,solana"
+      FIAT: "eur"
+      INTERVAL_SECONDS: "30"
+      TOPIC_TEMPLATE: "coingecko/{symbol}"
+      SYMBOL_MAP: '{"bitcoin":"BTC","ethereum":"ETH","solana":"SOL"}'
+    networks:
+      - red-ejemplo
+    depends_on:
+      - mosquitto
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    restart: unless-stopped
+    ports:
+      - '3000:3000'
+    volumes:
+      - './grafana:/var/lib/grafana'
+    networks:
+      - red-ejemplo
+    depends_on:
+      - influxdb
 
 networks:
   red-ejemplo:
