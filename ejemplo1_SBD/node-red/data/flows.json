@@ -384,5 +384,45 @@
         "x": 890,
         "y": 80,
         "wires": []
+    },
+    {
+        "id": "e21456838d9f9c2f",
+        "type": "mqtt in",
+        "z": "fe040b1cb2113e0e",
+        "name": "BTC",
+        "topic": "coingecko/BTC",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "ad3dc706cb7988af",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 250,
+        "y": 480,
+        "wires": [
+            [
+                "3b2a75ddb1717c3a",
+                "e04354b549e14a68"
+            ]
+        ]
+    },
+    {
+        "id": "3b2a75ddb1717c3a",
+        "type": "influxdb out",
+        "z": "fe040b1cb2113e0e",
+        "influxdb": "4d74df80c151c231",
+        "name": "BTC",
+        "measurement": "BTC",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "sbd",
+        "bucket": "coingecko",
+        "x": 490,
+        "y": 480,
+        "wires": []
     }
 ]

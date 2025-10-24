@@ -386,7 +386,7 @@
         "wires": []
     },
     {
-        "id": "1d8552e862e45298",
+        "id": "e21456838d9f9c2f",
         "type": "mqtt in",
         "z": "fe040b1cb2113e0e",
         "name": "BTC",
@@ -398,12 +398,30 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 230,
-        "y": 500,
+        "x": 250,
+        "y": 480,
         "wires": [
             [
-                "ffc674ad8d9a6cc8"
+                "3b2a75ddb1717c3a"
             ]
         ]
+    },
+    {
+        "id": "3b2a75ddb1717c3a",
+        "type": "influxdb out",
+        "z": "fe040b1cb2113e0e",
+        "influxdb": "4d74df80c151c231",
+        "name": "BTC",
+        "measurement": "BTC",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "ms",
+        "retentionPolicyV18Flux": "",
+        "org": "sbd",
+        "bucket": "coingecko",
+        "x": 490,
+        "y": 480,
+        "wires": []
     }
 ]

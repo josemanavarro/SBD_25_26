@@ -1,6 +1,11 @@
 services:
   mosquitto:
-    image: eclipse-mosquitto
+    image: sbd-mosquitto:latest
+    build:
+      context: ./mosquitto
+      dockerfile: Dockerfile
+    env_file:
+      - .env
     ports:
       - "1883:1883"
       - "8883:8883"
@@ -13,7 +18,7 @@ services:
     networks:
       - red-ejemplo
   node-red:
-    image: nodered/node-red
+    image: nodered/node-red:latest
     ports:
       - "1880:1880"
     environment:
@@ -72,6 +77,8 @@ services:
     restart: unless-stopped
     ports:
       - '3000:3000'
+    environment:
+      - user=admin
     volumes:
       - './grafana:/var/lib/grafana'
     networks:
