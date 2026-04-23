@@ -2,62 +2,76 @@ services:
   namenode:
     image: bde2020/hadoop-namenode:2.0.0-hadoop2.7.4-java8
     container_name: namenode
+    restart: unless-stopped
     volumes:
       - namenode:/hadoop/dfs/name
     environment:
-      - CLUSTER_NAME=test
+      CLUSTER_NAME: ventas-cluster
     env_file:
       - ./hadoop.env
     ports:
-      - "50070:50070"
+      - "50071:50070"   # Namenode Web UI
     networks:
       - hadoop-net
 
   datanode:
     image: bde2020/hadoop-datanode:2.0.0-hadoop2.7.4-java8
     container_name: datanode
+    restart: unless-stopped
     volumes:
       - datanode:/hadoop/dfs/data
     env_file:
       - ./hadoop.env
     environment:
       SERVICE_PRECONDITION: "namenode:50070"
+    ports:
+      - "50075:50075"   # Datanode Web UI
+    depends_on:
+      - namenode
     networks:
       - hadoop-net
 
-  hive-server:
-    image: bde2020/hive:2.3.2-postgresql-metastore
-    container_name: hive-server
-    depends_on:
-      - namenode
-      - datanode
-      - hive-metastore
-    env_file:
-      - ./hadoop.env
-    environment:
-      HIVE_CORE_CONF_javax_jdo_option_ConnectionURL: "jdbc:postgresql://hive-metastore-db/metastore"
-      SERVICE_PRECONDITION: "hive-metastore:9083"
-    ports:
-      - "10000:10000" # <--- Puerto clave para JasperReports
-    networks:
-      - hadoop-net
 
   hive-metastore-db:
     image: bde2020/hive-metastore-postgresql:2.3.0
     container_name: hive-metastore-db
+    restart: unless-stopped
     networks:
       - hadoop-net
 
   hive-metastore:
     image: bde2020/hive:2.3.2-postgresql-metastore
     container_name: hive-metastore
+    restart: unless-stopped
     env_file:
       - ./hadoop.env
     command: /opt/hive/bin/hive --service metastore
     environment:
       SERVICE_PRECONDITION: "namenode:50070 datanode:50075 hive-metastore-db:5432"
+      HIVE_CORE_CONF_javax_jdo_option_ConnectionURL: "jdbc:postgresql://hive-metastore-db/metastore"
+      HIVE_SITE_CONF_hive_metastore_schema_verification: "false"
+      HIVE_SITE_CONF_datanucleus_schema_autoCreateAll: "true"
     depends_on:
+      - namenode
+      - datanode
       - hive-metastore-db
+    networks:
+      - hadoop-net
+
+  hive-server:
+    image: bde2020/hive:2.3.2-postgresql-metastore
+    container_name: hive-server
+    restart: unless-stopped
+    env_file:
+      - ./hadoop.env
+    environment:
+      HIVE_CORE_CONF_javax_jdo_option_ConnectionURL: "jdbc:postgresql://hive-metastore-db/metastore"
+      SERVICE_PRECONDITION: "hive-metastore:9083"
+    ports:
+      - "10000:10000"
+      - "10002:10002"
+    depends_on:
+      - hive-metastore
     networks:
       - hadoop-net
 
